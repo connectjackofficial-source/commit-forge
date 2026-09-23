@@ -23,14 +23,14 @@ One line, works with every agent that loads `SKILL.md`:
 
 ```bash
 # git clone into your agents' skill directory
-git clone https://github.com/<your-username>/commit-forge.git \
+git clone https://github.com/connectjackofficial-source/commit-forge.git \
   ~/.claude/skills/commit-forge
 ```
 
 Or on Windows (PowerShell):
 
 ```powershell
-git clone https://github.com/<your-username>/commit-forge.git `
+git clone https://github.com/connectjackofficial-source/commit-forge.git `
   "$env:USERPROFILE\.claude\skills\commit-forge"
 ```
 
