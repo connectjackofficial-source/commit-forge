@@ -7,6 +7,12 @@
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](#)
 [![Conventional Commits](https://img.shields.io/badge/Commits-Conventional-orange.svg)](https://www.conventionalcommits.org/)
 
+<p align="center">
+  <img src="assets/demo.png" alt="commit-forge demo" width="460">
+</p>
+
+---
+
 AI coding agents are great at writing code. They are **terrible at committing
 it** — every repo ends up with a graveyard of `fix: update stuff`, blank PR
 descriptions, and changelogs that never get written.
