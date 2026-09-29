@@ -107,6 +107,10 @@ commit-forge/
 - `git` on PATH
 - An agent that reads `SKILL.md` (Claude Code, Cursor, Codex, Gemini CLI, Doubao, …)
 
+## CI usage
+
+Run `commit_lint.py` in CI to enforce conventional commits on PRs.
+
 ## License
 
 [MIT](LICENSE)
