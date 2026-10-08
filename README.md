@@ -61,6 +61,12 @@ python scripts/diff_context.py --stat-only
 # Validate a commit message before you commit
 echo "feat(api): handle null refresh token" | python scripts/commit_lint.py
 
+# Machine-readable validation (great for CI hooks)
+echo "ADD login button." | python scripts/commit_lint.py --json
+
+# Allow custom commit types from your repo convention
+python scripts/commit_lint.py --message "release(api): cut 2.0.0" --extra-types release
+
 # Scaffold a review-ready PR body
 python scripts/pr_body.py
 
