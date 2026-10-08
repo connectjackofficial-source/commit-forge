@@ -3,6 +3,13 @@
 All notable changes to this project are documented here.
 Format: [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.1.0] - 2026-10-08
+
+### Added
+- `commit_lint.py --json` — machine-readable validation for CI hooks
+- `commit_lint.py --extra-types` — custom commit types support
+- `tests/test_lint.py` — unit tests for lint, JSON mode, custom types
+
 ## [1.0.0] - 2026-09-23
 
 ### Added
