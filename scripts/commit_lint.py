@@ -31,7 +31,7 @@ HEADER_RE = re.compile(
 )
 
 
-def lint(message: str):
+def lint(message: str, extra_types: tuple = ()) -> list:
     problems = []
     # Drop trailing newline / CR
     lines = message.replace("\r", "").split("\n")
@@ -55,9 +55,10 @@ def lint(message: str):
         )
         return problems
 
-    if m["type"] not in TYPES:
+    allowed = set(TYPES) | set(extra_types)
+    if m["type"] not in allowed:
         problems.append(
-            f"Unknown type '{m['type']}'. Use one of: {', '.join(TYPES)}."
+            f"Unknown type '{m['type']}'. Use one of: {', '.join(sorted(allowed))}."
         )
 
     subject = m["subject"]
@@ -81,6 +82,10 @@ def lint(message: str):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--message", "-m", help="Commit message to lint")
+    ap.add_argument("--json", action="store_true",
+                    help="Emit machine-readable JSON instead of prose")
+    ap.add_argument("--extra-types", default="",
+                    help="Comma-separated custom commit types to allow")
     args = ap.parse_args()
 
     if args.message is not None:
@@ -88,7 +93,18 @@ def main():
     else:
         msg = sys.stdin.read()
 
-    problems = lint(msg)
+    extra = tuple(t.strip() for t in args.extra_types.split(",") if t.strip())
+    problems = lint(msg, extra_types=extra)
+
+    if args.json:
+        import json
+        print(json.dumps({
+            "valid": not problems,
+            "problems": problems,
+            "types": sorted(set(TYPES) | set(extra)),
+        }, indent=2))
+        sys.exit(0 if not problems else 1)
+
     if not problems:
         print("OK: conventional commit looks good.")
         sys.exit(0)
