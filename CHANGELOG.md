@@ -3,6 +3,12 @@
 All notable changes to this project are documented here.
 Format: [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.2.0] - 2026-10-10
+
+### Added
+- `install_hook.py` — commit-msg git hook installer (auto-lint every commit)
+- `tests/test_hook.py` — hook render + install/uninstall tests
+
 ## [1.1.0] - 2026-10-08
 
 ### Added
