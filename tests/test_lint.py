@@ -6,7 +6,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
-from commit_lint import lint
+from commit_lint import lint, suggest_type
 
 VALID = "feat(auth): add magic-link login\n"
 BAD = "ADD login button.\n"
@@ -40,8 +40,21 @@ def test_json_mode():
     print("test_json_mode: ok")
 
 
+def test_suggest_type():
+    assert suggest_type("add magic-link login") == "feat"
+    assert suggest_type("fix null token crash") == "fix"
+    assert suggest_type("update readme with examples") == "docs"
+    assert suggest_type("test the hook installer") == "test"
+    assert suggest_type("refactor the lint loop") == "refactor"
+    assert suggest_type("optimize the hot path") == "perf"
+    assert suggest_type("revert the auth change") == "revert"
+    assert suggest_type("anything else") == "chore"
+    print("test_suggest_type: ok")
+
+
 if __name__ == "__main__":
     test_lint_valid()
     test_custom_types()
     test_json_mode()
+    test_suggest_type()
     print("commit_lint tests passed")
