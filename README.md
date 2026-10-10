@@ -67,6 +67,9 @@ echo "ADD login button." | python scripts/commit_lint.py --json
 # Allow custom commit types from your repo convention
 python scripts/commit_lint.py --message "release(api): cut 2.0.0" --extra-types release
 
+# Guess the right type from your draft wording ("add login" -> feat)
+python -c "import sys; sys.path.insert(0,'scripts'); from commit_lint import suggest_type; print(suggest_type('add magic-link login'))"
+
 # Enforce Conventional Commits on every commit (git hook)
 python scripts/install_hook.py               # install commit-msg hook
 python scripts/install_hook.py --uninstall  # remove it later

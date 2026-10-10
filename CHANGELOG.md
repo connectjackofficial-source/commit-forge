@@ -3,6 +3,12 @@
 All notable changes to this project are documented here.
 Format: [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.3.0] - 2026-10-10
+
+### Added
+- `suggest_type()` — guess the Conventional Commits type from subject wording
+- Tests for type suggestion (feat/fix/docs/test/refactor/perf/revert/chore)
+
 ## [1.2.0] - 2026-10-10
 
 ### Added
