@@ -79,6 +79,36 @@ def lint(message: str, extra_types: tuple = ()) -> list:
     return problems
 
 
+def suggest_type(subject: str, extra_types: tuple = ()) -> str:
+    """Guess the Conventional Commits type from the subject wording.
+
+    Useful for editors / hook installers that want a sensible default
+    before the developer writes the message.
+    """
+    s = subject.lower().strip()
+    if re.search(r"^(revert|undo|rollback)\b", s):
+        return "revert"
+    if re.search(r"\b(readme|changelog|documentation|docs?)\b", s):
+        return "docs"
+    if re.search(r"^(fix|bug|repair|resolve|correct|patch)\b", s):
+        return "fix"
+    if re.search(r"^(add|new|introduce|implement|support|feat|feature|create|wire)\b", s):
+        return "feat"
+    if re.search(r"^(test|spec|assert)\b", s):
+        return "test"
+    if re.search(r"^(refactor|clean|simplify|restructure|rename|extract)\b", s):
+        return "refactor"
+    if re.search(r"^(perf|speed|optimize|faster|fast)\b", s):
+        return "perf"
+    if re.search(r"^(style|format|reindent)\b", s):
+        return "style"
+    if re.search(r"^(ci|workflow|action|pipeline)\b", s):
+        return "ci"
+    if re.search(r"^(chore|bump|version|depend|upgrade|release)\b", s):
+        return "chore"
+    return "chore"
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--message", "-m", help="Commit message to lint")
