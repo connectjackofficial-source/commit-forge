@@ -72,6 +72,26 @@ def render(stats_dict):
     return "\n".join(lines)
 
 
+def trend(rows, weeks: int = 12) -> list:
+    """Weekly commit counts (ISO weeks), newest first, last *weeks* weeks.
+
+    Feed the result to a sparkline or chart to see whether the repo's
+    cadence is ramping up or fading out.
+    """
+    import datetime as dt
+    from collections import defaultdict
+    by_week = defaultdict(int)
+    for r in rows:
+        try:
+            d = dt.date.fromisoformat(r["date"])
+        except ValueError:
+            continue
+        iso = d.isocalendar()
+        by_week[f"{iso[0]}-W{iso[1]:02d}"] += 1
+    items = sorted(by_week.items())
+    return [{"week": w, "commits": n} for w, n in items[-weeks:]]
+
+
 def git_log_lines(repo, days):
     cmd = ["git", "-C", repo, "log",
            "--pretty=format:%ad%x09%s", "--date=short"]
@@ -88,6 +108,8 @@ def main(argv=None):
     src.add_argument("--log", help="file with '<iso-date>\\t<message>' lines")
     ap.add_argument("--days", type=int, default=0,
                     help="only look back N days (with --repo)")
+    ap.add_argument("--trend", type=int, metavar="WEEKS", default=0,
+                    help="also print weekly commit counts for the last WEEKS")
     args = ap.parse_args(argv)
 
     if args.repo:
@@ -97,6 +119,11 @@ def main(argv=None):
             lines = f.read().splitlines()
     rows = parse_lines(lines)
     print(render(stats(rows)))
+    if args.trend:
+        print("\nweekly trend (newest first):")
+        for t in trend(rows, weeks=args.trend):
+            bar = "#" * min(t["commits"], 40)
+            print(f"  {t['week']:<10} {t['commits']:>4}  {bar}")
     return 0
 
 
