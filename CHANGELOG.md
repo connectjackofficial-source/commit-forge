@@ -3,6 +3,13 @@
 All notable changes to this project are documented here.
 Format: [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.5.0] - 2026-10-14
+
+### Added
+- `trend()` — weekly (ISO week) commit counts for cadence charts;
+  `--trend WEEKS` flag on the CLI
+- `tests/test_trend.py` covering ISO-week grouping and edge cases
+
 ## [1.4.0] - 2026-10-14
 
 ### Added
