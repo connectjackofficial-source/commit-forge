@@ -79,6 +79,10 @@ python scripts/pr_body.py
 
 # Draft changelog entries since the last tag
 python scripts/changelog.py
+
+# Understand your commit habits: type mix, cadence, top scopes
+git log --pretty=format:%ad%x09%s --date=short | python scripts/commit_stats.py
+python scripts/commit_stats.py --repo . --days 90
 ```
 
 The skill orchestrates these for you — you just say "commit" or "open a PR".

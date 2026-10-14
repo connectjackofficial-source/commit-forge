@@ -3,6 +3,14 @@
 All notable changes to this project are documented here.
 Format: [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.4.0] - 2026-10-14
+
+### Added
+- `commit_stats.py` — analyze `git log` for type mix, daily cadence,
+  top scopes and breaking-change counts; pipe or `--repo` mode
+- `tests/test_stats.py` covering parsing, aggregation, rendering and a
+  real-repo smoke test
+
 ## [1.3.0] - 2026-10-10
 
 ### Added
