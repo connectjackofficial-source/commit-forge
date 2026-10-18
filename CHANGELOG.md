@@ -3,6 +3,14 @@
 All notable changes to this project are documented here.
 Format: [Keep a Changelog](https://keepachangelog.com/).
 
+## [1.6.0] - 2026-10-18
+
+### Added
+- `scripts/release.py` — turn the newest changelog block into a
+  GitHub-release-ready body; `--check-tag` refuses duplicate releases
+- `scripts/contributor.py` — per-author summary (commits, files,
+  insertions, deletions) via shortlog + numstat
+
 ## [1.5.0] - 2026-10-14
 
 ### Added
