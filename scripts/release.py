@@ -21,7 +21,7 @@ def parse_changelog(path: Path):
     blocks = re.split(r"(?m)^##\s+", text)
     for block in blocks[1:]:
         head, _, rest = block.partition("\n")
-        m = re.match(r"([0-9]+(?:\.[0-9]+)+)", head.strip())
+        m = re.match(r"\[?([0-9]+(?:\.[0-9]+)+)", head.strip())
         if m:
             return m.group(1), [ln for ln in rest.splitlines() if ln.strip()]
     raise SystemExit("no version block found in CHANGELOG.md")
